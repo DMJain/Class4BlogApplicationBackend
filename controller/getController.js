@@ -7,9 +7,9 @@ const { populateComments } = require("../utils/functions");
 //Get All blogs
 const getAllBlogs = async (req, res) => {
   // Destructure the includesIsActive query parameter from the request
-  const { includesIsActive = false } = req.query;
+  const { includesInActive = false } = req.query;
   // If includesIsActive is true, return all blogs
-  const blogs = includesIsActive
+  const blogs = includesInActive
     ? await Blog.find()
     : await Blog.find({ isActive: true });
 
@@ -24,10 +24,10 @@ const getAllBlogs = async (req, res) => {
 const getBlog = async (req, res) => {
   // Destructure the slug and includesIsActive query parameters from the request
   const slug = req.params.slug;
-  const { includesIsActive = false } = req.query;
+  const { includesInActive = false } = req.query;
 
   // If includesIsActive is true, return the blog by slug
-  const blog = includesIsActive
+  const blog = includesInActive
     ? await Blog.findOne({ slug: slug })
     : await Blog.findOne({ slug: slug, isActive: true });
 
